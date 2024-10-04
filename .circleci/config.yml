@@ -3,6 +3,10 @@ workflows:
   all:
     jobs:
       # - lint
+      - examples:
+          matrix:
+            parameters:
+              rust-version: ["stable", "beta", "nightly"]
       - tests:
           matrix:
             parameters:
@@ -49,6 +53,18 @@ jobs:
       - run:
           name: Lint
           command: cargo fmt --all -- --check
+  examples:
+    parameters:
+      rust-version:
+        type: string
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+      - run: *rust_version
+      - run:
+          name: Vartime example
+          command: cargo run --example vartime --release
   tests:
     parameters:
       rust-version:

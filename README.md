@@ -10,7 +10,7 @@ Discrete gaussian samples.
 Sampling with target theta: 20
 Approximated k = 23
 Approximated theta: 19.534401406624458
-1000 samples in: 10.07ms
+1000 samples in: 16.90ms
 ```
 
 ## Feature Tracking
@@ -18,9 +18,8 @@ Approximated theta: 19.534401406624458
 - [x] variable time sampling in `u32`
   - [ ] in [`scalarff::FieldElement`](https://docs.rs/scalarff/latest/scalarff/trait.FieldElement.html)
   - [ ] in [`ring_math::PolynomialRingElement`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/polynomial_ring.rs#L25)
-- [ ] arbitrary precision decimal math
-- [ ] sample a larger 
-- [ ]  cumulative distribution table macro
+- [ ] arbitrary precision decimal math?
+- [ ] cumulative distribution table
 - [ ] constant time sampling in `u32` 
   - [ ] in [`scalarff::FieldElement`](https://docs.rs/scalarff/latest/scalarff/trait.FieldElement.html)
   - [ ] in [`ring_math::PolynomialRingElement`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/polynomial_ring.rs#L25)
