@@ -13,12 +13,8 @@ pub const THETA_0: f64 = 0.84932180028802;
 
 /// Approximate a `k` value for the requested theta.
 pub fn k_from_theta(theta: f64) -> u32 {
-    // using `as` here should be okay 
+    // using `as` here should be okay as long as
+    // theta / THETA_0 < 2^32
+    // most standard deviations (theta) should be < 10000
     ((theta / THETA_0).trunc() as u64).try_into().unwrap()
-}
-
-/// Losslessly extract the mantissa from an f64. Discard
-/// the decimal portion, rounding toward 0.
-pub fn f64_to_u64(x: f64) -> u64{
-    x as u64
 }
