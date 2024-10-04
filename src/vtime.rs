@@ -82,10 +82,15 @@ pub fn euler_50_approx(x: f64) -> f64 {
 }
 
 #[test]
-fn generate_samples() {
-    let target_theta = 30.0;
-    let k: u32 = super::f64_to_u64(THETA_0 / target_theta).try_into().unwrap();
+fn generate_samples_with_k() {
     for _ in 0..1000 {
-        sample_vartime(k, &mut rand::thread_rng());
+        sample_vartime_k(40, &mut rand::thread_rng());
+    }
+}
+
+#[test]
+fn generate_samples() {
+    for _ in 0..1000 {
+        sample_vartime(10.0, &mut rand::thread_rng());
     }
 }
