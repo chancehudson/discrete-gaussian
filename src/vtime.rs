@@ -73,9 +73,17 @@ pub fn euler_50_approx(x: f64) -> f64 {
     return r * r;
 }
 
+/// Losslessly extract the mantissa from an f64. Discard
+/// the decimal portion, rounding toward 0.
+pub fn f64_to_u64(x: f64) -> u64{
+    x.to_bits() & ((1 << (64 - f64::MANTISSA_DIGITS)) - 1)
+}
+
 #[test]
 fn generate_samples() {
-    // for _ in 0..1000 {
-    //     println!("{}", sample_vartime(30, &mut rand::thread_rng()));
-    // }
+    let target_theta = 30.0;
+    let k: u32 = f64_to_u64(THETA_0 / target_theta).try_into().unwrap();
+    for _ in 0..1000 {
+        sample_vartime(k, &mut rand::thread_rng());
+    }
 }
