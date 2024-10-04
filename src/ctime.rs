@@ -2,6 +2,32 @@
 /// 
 use super::vtime;
 
+/// Constant time approximation of 2^x where x is between 0 and 1 non-inclusive.
+/// A polynomial approximation is calculated using the sollya tool `guessdegree`
+/// and `fpminimax` as described in the [FACCT paper](https://eprint.iacr.org/2018/1234.pdf)
+/// (page 8 and 9). The `supnorm` command is used to estimate the relative error of the
+/// approximation as ~2^-45.
+///
+/// This approximation is conjectured to be constant time as it involves only
+/// floating point addition and multiplication.
+///
+/// Input range checks are only applied in debug builds.
+pub fn pow2_approx(x: f64) -> f64 {
+    #[cfg(debug_assertions)]
+    if x < 0.0 || x >= 1.0 {
+        panic!("pow2_approx is only accurate over the interval (0, 1). Received {x}")
+    }
+    return 1.0 + x * (0.69314718056193380668617010087473317980766296386719
+    + x * (0.24022650687652774559310842050763312727212905883789
+    + x * (5.5504109841318247098307381293125217780470848083496e-2
+    + x * (9.6181209331756452318717975913386908359825611114502e-3
+    + x * (1.3333877552501097445841748978523355617653578519821e-3
+    + x * (1.5396043210538638053991311593904356413986533880234e-4
+    + x * (1.5359914219462011698283041005730353845137869939208e-5
+    + x * (1.2303944375555413249736938854916878938183799618855e-6
+    + x * 1.43291003789439094275872613876154915146798884961754e-7))))))));
+}
+
 pub fn sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     if k == 0 {
         panic!("k value must be greater than 0");
@@ -35,30 +61,4 @@ pub fn sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
 
 1
     // panic!();
-}
-
-/// Constant time approximation of 2^x where x is between 0 and 1 non-inclusive.
-/// A polynomial approximation is calculated using the sollya tool `guessdegree`
-/// and `fpminimax` as described in the [FACCT paper](https://eprint.iacr.org/2018/1234.pdf)
-/// (page 8 and 9). The `supnorm` command is used to estimate the relative error of the
-/// approximation as ~2^-45.
-///
-/// This approximation is conjectured to be constant time as it involves only
-/// floating point addition and multiplication.
-///
-/// Input range checks are only applied in debug builds.
-pub fn pow2_approx(x: f64) -> f64 {
-    #[cfg(debug_assertions)]
-    if x < 0.0 || x >= 1.0 {
-        panic!("pow2_approx is only accurate over the interval (0, 1). Received {x}")
-    }
-    return 1.0 + x * (0.69314718056193380668617010087473317980766296386719
-    + x * (0.24022650687652774559310842050763312727212905883789
-    + x * (5.5504109841318247098307381293125217780470848083496e-2
-    + x * (9.6181209331756452318717975913386908359825611114502e-3
-    + x * (1.3333877552501097445841748978523355617653578519821e-3
-    + x * (1.5396043210538638053991311593904356413986533880234e-4
-    + x * (1.5359914219462011698283041005730353845137869939208e-5
-    + x * (1.2303944375555413249736938854916878938183799618855e-6
-    + x * 1.43291003789439094275872613876154915146798884961754e-7))))))));
 }

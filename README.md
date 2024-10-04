@@ -11,3 +11,6 @@ Discrete gaussian samples.
 - [ ] constant time sampling in `u32` 
   - [ ] in [`scalarff::FieldElement`](https://docs.rs/scalarff/latest/scalarff/trait.FieldElement.html)
   - [ ] in [`ring_math::PolynomialRingElement`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/polynomial_ring.rs#L25)
+- structure compatibility
+  - [`ring_math::Matrix2D`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/matrix2d.rs#L7) compat, sample into a matrix
+  - [`ring_math::Vector](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/vector.rs#L6) compat, sample into a vector

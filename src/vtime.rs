@@ -1,8 +1,5 @@
-//! Variable time discrete sampling. Specifically
-//! the 
-//! 
-//! constant time discrete gaussian sampler.
-//! 
+//! Variable time discrete sampling over algebraic structures.
+//!
 
 use rand::distributions::Bernoulli;
 use rand::distributions::Distribution;
@@ -12,7 +9,7 @@ use crate::THETA_0;
 /// Vartime u32 gaussian sampling
 pub fn sample_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     let bits = 32;
-    let theta = f64::from(k) * THETA_0;
+    let theta: f64 = f64::from(k) * THETA_0;
     let x = sample_theta_0_vartime(rng);
     let y = rng.gen_range(0..k);
     let z = k * x + y;
@@ -33,7 +30,7 @@ pub fn sample_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
 
 /// Vartime probabilistic sampling from the theta_0 discrete
 /// gaussian distribution evaluated over the positive integers.
-/// 
+///
 /// theta_0 = sqrt(1/(2*ln(2))) as defined in https://eprint.iacr.org/2018/1234.pdf
 /// page 6
 pub fn sample_theta_0_vartime<R: rand::Rng>(rng: &mut R) -> u32 {
