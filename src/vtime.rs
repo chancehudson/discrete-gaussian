@@ -5,6 +5,7 @@ use rand::distributions::Bernoulli;
 use rand::distributions::Distribution;
 
 use crate::THETA_0;
+use super::ctime::pow2_1024;
 
 /// Vartime u32 gaussian sampling
 pub fn sample_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
@@ -16,7 +17,7 @@ pub fn sample_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     let t = y * (y + 2 * k * x);
     let mut b = 1;
     for i in (0..bits).rev() {
-        let p_i = f64::exp(-1.0 * f64::exp2(f64::from(i)) / (2.0 * theta * theta));
+        let p_i = euler_50_approx(-1.0 * pow2_1024(f64::from(i) / (2.0 * theta * theta)));
         let t_i = (t >> i) & 1;
         let d = Bernoulli::new(p_i).unwrap();
         let v = d.sample(&mut rand::thread_rng());
@@ -52,9 +53,29 @@ pub fn sample_theta_0_vartime<R: rand::Rng>(rng: &mut R) -> u32 {
     }
 }
 
+/// 50 bit euler approximation in f64
+/// returns e^x
+/// 
+/// variable time implementation due to division operator
+pub fn euler_50_approx(x: f64) -> f64 {
+    let p1: f64 = 1.66666666666666019037 * 10_f64.powf(-1_f64);
+    let p2: f64 = -2.77777777770155933842 * 10_f64.powf(-3_f64);
+    let p3: f64 = 6.61375632143793436117 * 10_f64.powf(-5_f64);
+    let p4: f64 = -1.65339022054652515390_f64 * 10_f64.powf(-6_f64);
+    let p5 = 4.13813679705723846039 * 10_f64.powf(-8_f64);
+    let s = x / 2_f64;
+    let t = s * s;
+    // Let c = s−t·(p1 +t·(p2 +t·(p3 +t·(p4 +t·p5))))
+    // explicitly write horner evaluation i guess
+    let c = s - t * (p1 + t * (p2 + t * (p3 + t * (p4 + t * p5))));
+    // Let r = 1 − ((s · c) / (c − 2) − s).
+    let r = 1_f64 - ((s * c) / (c - 2_f64) - s);
+    return r * r;
+}
+
 #[test]
 fn generate_samples() {
-    for _ in 0..1000 {
-        println!("{}", sample_vartime(30, &mut rand::thread_rng()));
-    }
+    // for _ in 0..1000 {
+    //     println!("{}", sample_vartime(30, &mut rand::thread_rng()));
+    // }
 }
