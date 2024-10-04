@@ -15,7 +15,7 @@ pub fn sample_vartime<R: rand::Rng>(theta: f64, rng: &mut R) -> u32 {
     sample_vartime_k(k, rng)
 }
 
-/// Vartime u32 gaussian sampling
+/// Vartime u32 gaussian sampling based on [DDLL13](https://eprint.iacr.org/2013/383.pdf).
 pub fn sample_vartime_k<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     let bits = 32;
     let theta: f64 = f64::from(k) * THETA_0;

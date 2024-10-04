@@ -1,6 +1,6 @@
 # discrete-gaussian [![Build](https://img.shields.io/circleci/build/github/chancehudson/discrete-gaussian/main)](https://dl.circleci.com/status-badge/redirect/gh/chancehudson/discrete-gaussian/tree/main)
 
-Discrete gaussian samples.
+Discrete gaussian samples based on [FACCT](https://eprint.iacr.org/2018/1234.pdf) and [DDLL13](https://eprint.iacr.org/2013/383.pdf).
 
 ## Example
 
@@ -25,4 +25,4 @@ Approximated theta: 19.534401406624458
   - [ ] in [`ring_math::PolynomialRingElement`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/polynomial_ring.rs#L25)
 - structure compatibility
   - [`ring_math::Matrix2D`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/matrix2d.rs#L7) compat, sample into a matrix
-  - [`ring_math::Vector](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/vector.rs#L6) compat, sample into a vector
+  - [`ring_math::Vector`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/vector.rs#L6) compat, sample into a vector
