@@ -3,13 +3,13 @@
 use super::vtime;
 
 /// 53 bit accurate representation of 2^x
-/// for x in 0..1. Similar to the exponentiation
+/// for x in [0, 1].
 /// function described in [FACCT](https://eprint.iacr.org/2018/1234.pdf).
 ///
 /// This approximation is conjectured to be constant time as it involves only
 /// floating point addition and multiplication.
 /// 
-/// ~27 f64 multiplications and additions
+/// ~11 f64 multiplications and additions
 ///
 /// Input range checks are only applied in debug builds.
 /// 
@@ -26,13 +26,13 @@ pub fn pow2_unit(x: f64) -> f64 {
 }
 
 /// 53 bit accurate approximation of 2^x
-/// for x in 0..14. Outputs between 1 and 16384
+/// for x in [0, 10]. Outputs between 1 and 1024
 /// are valid.
 /// 
 /// This approximation is conjectured to be constant time as it involves only
 /// floating point addition and multiplication.
 /// 
-/// ~27 f64 multiplications and additions
+/// ~23 f64 multiplications and additions
 /// 
 /// Input range checks are only applied in debug builds.
 /// 
