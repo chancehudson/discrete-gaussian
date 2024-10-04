@@ -4,8 +4,8 @@
 use rand::distributions::Bernoulli;
 use rand::distributions::Distribution;
 
-use crate::THETA_0;
 use super::ctime::pow2_1024;
+use crate::THETA_0;
 
 /// Sample a u32 integer from a gaussian distribution. Approximates
 /// a `k` parameter based on the requested theta.
@@ -63,7 +63,7 @@ pub fn sample_theta_0_vartime<R: rand::Rng>(rng: &mut R) -> u32 {
 
 /// 50 bit euler approximation in f64
 /// returns e^x
-/// 
+///
 /// variable time implementation due to division operator
 pub fn euler_50_approx(x: f64) -> f64 {
     let p1: f64 = 1.66666666666666019037 * 10_f64.powf(-1_f64);
