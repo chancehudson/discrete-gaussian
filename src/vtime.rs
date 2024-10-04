@@ -7,8 +7,16 @@ use rand::distributions::Distribution;
 use crate::THETA_0;
 use super::ctime::pow2_1024;
 
+/// Sample a u32 integer from a gaussian distribution. Approximates
+/// a `k` parameter based on the requested theta.
+pub fn sample_vartime<R: rand::Rng>(theta: f64, rng: &mut R) -> u32 {
+    // Approximate a k value
+    let k: u32 = super::k_from_theta(theta);
+    sample_vartime_k(k, rng)
+}
+
 /// Vartime u32 gaussian sampling
-pub fn sample_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
+pub fn sample_vartime_k<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     let bits = 32;
     let theta: f64 = f64::from(k) * THETA_0;
     let x = sample_theta_0_vartime(rng);
@@ -24,7 +32,7 @@ pub fn sample_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
         b = b * (1 - t_i + u32::from(v) * t_i);
     }
     if b == 0 {
-        return sample_vartime(k, rng);
+        return sample_vartime_k(k, rng);
     }
     z
 }
@@ -73,16 +81,10 @@ pub fn euler_50_approx(x: f64) -> f64 {
     return r * r;
 }
 
-/// Losslessly extract the mantissa from an f64. Discard
-/// the decimal portion, rounding toward 0.
-pub fn f64_to_u64(x: f64) -> u64{
-    x.to_bits() & ((1 << (64 - f64::MANTISSA_DIGITS)) - 1)
-}
-
 #[test]
 fn generate_samples() {
     let target_theta = 30.0;
-    let k: u32 = f64_to_u64(THETA_0 / target_theta).try_into().unwrap();
+    let k: u32 = super::f64_to_u64(THETA_0 / target_theta).try_into().unwrap();
     for _ in 0..1000 {
         sample_vartime(k, &mut rand::thread_rng());
     }
