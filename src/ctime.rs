@@ -1,8 +1,8 @@
 /// WIP: not currently in use
 /// 
-use super::vartime;
+use super::vtime;
 
-fn gaussian_sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
+pub fn sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     if k == 0 {
         panic!("k value must be greater than 0");
     }
@@ -10,7 +10,7 @@ fn gaussian_sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     // range 0..=(k-1)
     let y = f64::from(rng.gen_range(0..k));
     // todo: gaussian sample
-    let x = f64::from(vartime::sample_theta_0_vartime(rng));
+    let x = f64::from(vtime::sample_theta_0_vartime(rng));
     let t = y * (y + 2.0 * f64::from(k) * x);
     let a = -1.0 * t / f64::from(k * k);
     // z should end up being positive

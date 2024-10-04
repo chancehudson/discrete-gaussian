@@ -1,10 +1,16 @@
+//! Variable time discrete sampling. Specifically
+//! the 
+//! 
+//! constant time discrete gaussian sampler.
+//! 
+
 use rand::distributions::Bernoulli;
 use rand::distributions::Distribution;
 
 use crate::THETA_0;
 
 /// Vartime u32 gaussian sampling
-pub fn binary_sampler_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
+pub fn sample_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     let bits = 32;
     let theta = f64::from(k) * THETA_0;
     let x = sample_theta_0_vartime(rng);
@@ -20,7 +26,7 @@ pub fn binary_sampler_vartime<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
         b = b * (1 - t_i + u32::from(v) * t_i);
     }
     if b == 0 {
-        return binary_sampler_vartime(k, rng);
+        return sample_vartime(k, rng);
     }
     z
 }
@@ -52,16 +58,6 @@ pub fn sample_theta_0_vartime<R: rand::Rng>(rng: &mut R) -> u32 {
 #[test]
 fn generate_samples() {
     for _ in 0..1000 {
-    println!("{}", binary_sampler_vartime(30, &mut rand::thread_rng()));
+        println!("{}", sample_vartime(30, &mut rand::thread_rng()));
     }
-    // let mut zeros = 0;
-    // let mut ones = 0;
-    // loop {
-    //     let v =  sample_theta_0_vartime(&mut rand::thread_rng());
-    //     if v != 0 && v != 1 {
-    //         println!("found after {zeros} samples: {v}");
-    //         break;
-    //     }
-    //     zeros += 1;
-    // }
 }

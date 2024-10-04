@@ -1,9 +1,8 @@
-//! WIP implementation of the [FFACT](https://eprint.iacr.org/2018/1234.pdf)
-//! constant time discrete gaussian sampler.
-//! 
+mod vtime;
+mod ctime;
 
-mod vartime;
-mod consttime;
+pub use vtime::sample_vartime;
+pub use ctime::sample;
 
 /// Approximation of sqrt(1/(2*ln(2))) to 20 decimal places.
 /// as defined in https://eprint.iacr.org/2018/1234.pdf page 6
