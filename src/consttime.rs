@@ -1,4 +1,5 @@
-
+/// WIP: not currently in use
+/// 
 use super::vartime;
 
 fn gaussian_sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {

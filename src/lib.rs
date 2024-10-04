@@ -1,3 +1,7 @@
+//! WIP implementation of the [FFAST](https://eprint.iacr.org/2018/1234.pdf)
+//! constant time discrete gaussian sampler.
+//! 
+
 mod vartime;
 mod consttime;
 

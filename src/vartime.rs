@@ -1,5 +1,3 @@
-use core::panic;
-
 use rand::distributions::Bernoulli;
 use rand::distributions::Distribution;
 
