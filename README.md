@@ -4,9 +4,9 @@ Discrete gaussian samples.
 
 ## Feature Tracking
 
-- [x] var_time sampling in `u32`
+- [x] variable time sampling in `u32`
   - [ ] in [`scalarff::FieldElement`](https://docs.rs/scalarff/latest/scalarff/trait.FieldElement.html)
   - [ ] in [`ring_math::PolynomialRingElement`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/polynomial_ring.rs#L25)
-- [ ] const_time sampling in `u32` 
+- [ ] constant time sampling in `u32` 
   - [ ] in [`scalarff::FieldElement`](https://docs.rs/scalarff/latest/scalarff/trait.FieldElement.html)
   - [ ] in [`ring_math::PolynomialRingElement`](https://github.com/chancehudson/ashlang/blob/main/ring-math/src/polynomial_ring.rs#L25)
