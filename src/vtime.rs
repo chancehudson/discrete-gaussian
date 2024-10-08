@@ -18,23 +18,24 @@ pub fn sample_vartime<R: rand::Rng>(theta: f64, rng: &mut R) -> u32 {
 /// Vartime u32 gaussian sampling based on [DDLL13](https://eprint.iacr.org/2013/383.pdf).
 pub fn sample_vartime_k<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     let bits = 32;
+    // check that k is <= 2^52? somehow without doing it vartime?
     let theta: f64 = f64::from(k) * THETA_0;
     let x = sample_theta_0_vartime(rng);
     let y = rng.gen_range(0..k);
-    let z = k * x + y;
-    let t = y * (y + 2 * k * x);
+    let z = u64::from(k) * u64::from(x) + u64::from(y);
+    let t = u64::from(y) * (u64::from(y) + 2 * u64::from(k) * u64::from(x));
     let mut b = 1;
     for i in (0..bits).rev() {
         let p_i = euler_50_approx(-1.0 * pow2_1024(f64::from(i) / (2.0 * theta * theta)));
         let t_i = (t >> i) & 1;
         let d = Bernoulli::new(p_i).unwrap();
         let v = d.sample(&mut rand::thread_rng());
-        b = b * (1 - t_i + u32::from(v) * t_i);
+        b = b * (1 - t_i + u64::from(v) * t_i);
     }
     if b == 0 {
         return sample_vartime_k(k, rng);
     }
-    z
+    u32::try_from(z).unwrap()
 }
 
 /// Vartime probabilistic sampling from the theta_0 discrete

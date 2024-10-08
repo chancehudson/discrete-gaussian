@@ -6,7 +6,7 @@ use discrete_gaussian::THETA_0;
 
 pub fn main() {
     let sample_count = 1000;
-    let target_theta = 20.0;
+    let target_theta = 27000.0;
     println!("Sampling with target theta: {target_theta}");
     let k: u32 = k_from_theta(target_theta);
     println!("Approximated k = {k}");
