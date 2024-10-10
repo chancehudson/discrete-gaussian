@@ -1,3 +1,6 @@
+#![doc = include_str!("../README.md")]
+#![doc(html_root_url = "https://docs.rs/discrete-gaussian")]
+
 pub mod ctime;
 pub mod vtime;
 

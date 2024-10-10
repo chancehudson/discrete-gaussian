@@ -1,15 +1,12 @@
 [package]
 name = "discrete-gaussian"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 authors = ["Chance Hudson <PSE>"]
 description = "Gaussian sampling over discrete fields/rings/sets"
 homepage = "https://github.com/chancehudson/discrete-gaussian"
 repository = "https://github.com/chancehudson/discete-gaussian"
 license = "MIT OR Apache-2.0"
-
-[package.metadata.docs.rs]
-readme = "README.md"
 
 [lib]
 
