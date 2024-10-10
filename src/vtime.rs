@@ -6,8 +6,8 @@ use rand::distributions::Distribution;
 use super::ctime::pow2_1024;
 use crate::THETA_0;
 
-/// Sample a u32 integer from a gaussian distribution. Approximates
-/// a `k` parameter based on the requested theta.
+/// Sample a u32 integer from a gaussian distribution. Automatically
+/// approximates a `k` parameter based on the requested theta.
 pub fn sample_vartime<R: rand::Rng>(theta: f64, rng: &mut R) -> u32 {
     // Approximate a k value
     let k: u32 = super::k_from_theta(theta);
@@ -40,7 +40,7 @@ pub fn sample_vartime_k<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
 /// Vartime probabilistic sampling from the theta_0 discrete
 /// gaussian distribution evaluated over the positive integers.
 ///
-/// theta_0 = sqrt(1/(2*ln(2))) as defined in https://eprint.iacr.org/2018/1234.pdf
+/// `theta_0 = sqrt(1/(2*ln(2)))` as defined in [FACCT](https://eprint.iacr.org/2018/1234.pdf)
 /// page 6
 pub fn sample_theta_0_vartime<R: rand::Rng>(rng: &mut R) -> u32 {
     let b = rng.gen_range(0..=1);
@@ -62,7 +62,7 @@ pub fn sample_theta_0_vartime<R: rand::Rng>(rng: &mut R) -> u32 {
 }
 
 /// 50 bit euler approximation in f64
-/// returns e^x
+/// returns `e^x`
 ///
 /// variable time implementation due to division operator
 pub fn euler_50_approx(x: f64) -> f64 {
