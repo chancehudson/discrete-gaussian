@@ -16,12 +16,10 @@ use super::vtime;
 ///
 /// Input range checks are only applied in debug builds.
 ///
-/// ```
 /// sollya
 /// > guessdegree(1, [0, 1], 1b-53, 1/2^x);
 /// [11;11]
 /// > fpminimax(2^x, 11, [|1, D...|],[0,1], floating, relative);
-/// ```
 pub fn pow2_unit(x: f64) -> f64 {
     #[cfg(debug_assertions)]
     if x < 0.0 || x > 1.0 {
@@ -55,12 +53,10 @@ pub fn pow2_unit(x: f64) -> f64 {
 ///
 /// Input range checks are only applied in debug builds.
 ///
-/// ```
 /// sollya
 /// > guessdegree(1, [0, 10], 1b-53, 1/2^x);
 /// [21;23]
 /// > fpminimax(2^x, 23, [|1, D...|],[0,10], floating, relative);
-/// ```
 pub fn pow2_1024(x: f64) -> f64 {
     #[cfg(debug_assertions)]
     if x < 0.0 || x > 10.0 {
