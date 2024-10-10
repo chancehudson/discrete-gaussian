@@ -6,7 +6,7 @@ Discrete gaussian samples based on [FACCT](https://eprint.iacr.org/2018/1234.pdf
 
 `cargo run --example vartime --release`
 
-```
+```ignore
 Sampling with target theta: 20
 Approximated k = 23
 Approximated theta: 19.534401406624458
