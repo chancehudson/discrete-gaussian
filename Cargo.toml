@@ -1,10 +1,9 @@
 [package]
 name = "discrete-gaussian"
-version = "0.1.0"
+version = "0.0.0"
 edition = "2021"
 
 [package.metadata.docs.rs]
-rustdoc-args = ["--document-private-items", "--extern-html-root-url=https://docs.rs/"]
 readme = "README.md"
 
 [lib]

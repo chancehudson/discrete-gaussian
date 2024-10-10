@@ -1,5 +1,8 @@
-/// Functions that are designed to be constant time.
-///
+//! Functions that are conjectured to be constant time.
+//!
+//! This includes functions for intermediate calculations like
+//! approximating fractional exponents as well (in the future)
+//! functions for discrete gaussian sampling in constant time.
 use super::vtime;
 
 /// 53 bit accurate representation of 2^x
@@ -13,10 +16,12 @@ use super::vtime;
 ///
 /// Input range checks are only applied in debug builds.
 ///
+/// ```
 /// sollya
 /// > guessdegree(1, [0, 1], 1b-53, 1/2^x);
 /// [11;11]
 /// > fpminimax(2^x, 11, [|1, D...|],[0,1], floating, relative);
+/// ```
 pub fn pow2_unit(x: f64) -> f64 {
     #[cfg(debug_assertions)]
     if x < 0.0 || x > 1.0 {
@@ -50,10 +55,12 @@ pub fn pow2_unit(x: f64) -> f64 {
 ///
 /// Input range checks are only applied in debug builds.
 ///
+/// ```
 /// sollya
 /// > guessdegree(1, [0, 10], 1b-53, 1/2^x);
 /// [21;23]
 /// > fpminimax(2^x, 23, [|1, D...|],[0,10], floating, relative);
+/// ```
 pub fn pow2_1024(x: f64) -> f64 {
     #[cfg(debug_assertions)]
     if x < 0.0 || x > 10.0 {
@@ -88,6 +95,7 @@ pub fn pow2_1024(x: f64) -> f64 {
         + x * 2.39759652843898776507354327086164592546857185532465e-25))))))))))))))))))))));
 }
 
+/// WIP: not currently functional
 pub fn sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
     if k == 0 {
         panic!("k value must be greater than 0");
@@ -125,8 +133,8 @@ pub fn sample<R: rand::Rng>(k: u32, rng: &mut R) -> u32 {
         f
     );
 
-    1
-    // panic!();
+    panic!();
+    // 1
 }
 
 #[cfg(test)]

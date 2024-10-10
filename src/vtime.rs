@@ -1,6 +1,5 @@
 //! Variable time discrete sampling over algebraic structures.
 //!
-
 use rand::distributions::Bernoulli;
 use rand::distributions::Distribution;
 
