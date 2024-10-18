@@ -148,9 +148,9 @@ dependencies = [
 
 [[package]]
 name = "scalarff"
-version = "0.4.3"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dfef4665624906679b3a8791efb36e3c956050297b7996762b53cf0faf1f5acc"
+checksum = "072e68a21fc6376aa00020f4c3363e5700afe30c309b51abe0e74af5392b3ce1"
 dependencies = [
  "colored",
  "num-bigint",

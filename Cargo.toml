@@ -1,6 +1,6 @@
 [package]
 name = "discrete-gaussian"
-version = "0.0.3"
+version = "0.0.4"
 edition = "2021"
 authors = ["Chance Hudson <PSE>"]
 description = "Gaussian sampling over discrete fields/rings/sets"
@@ -12,4 +12,4 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 rand = "0.8.5"
-scalarff = "0.4.3"
+scalarff = "0.6.0"
